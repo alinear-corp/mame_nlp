@@ -20,7 +20,11 @@ DEFAULT_TARGETS = {
 
 
 class ParenRemover:
-    def __init__(self, targets: Optional[Dict[str, str]] = None):
+    def __init__(
+        self,
+        targets: Optional[Dict[str, str]] = None,
+        alt: str = "",
+    ):
         if targets is None:
             targets = DEFAULT_TARGETS
 
@@ -29,6 +33,7 @@ class ParenRemover:
             for k, v in targets.items()
         )
         self.targets = targets
+        self.alt = alt
 
     def remove(self, text: str) -> str:
         stack = []
@@ -39,6 +44,7 @@ class ParenRemover:
             close = self.targets.get(c)
             if close is not None:
                 stack.append(close)
+                buf.write(self.alt)
             elif len(stack) == 0:
                 buf.write(c)
                 last = i

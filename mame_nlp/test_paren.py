@@ -36,3 +36,13 @@ class TestParenRemover(TestCase):
         )
         expected = "括弧の中の括弧が（このように（内側の括弧)だけが）対応していないパターン。"
         self.assertEqual(actual, expected)
+
+
+class TestParenRemoverAlt(TestCase):
+    def setUp(self) -> None:
+        self.remover = ParenRemover(alt=" ")
+
+    def test_remove(self):
+        actual = self.remover.remove("正しく括弧が対応している（このように）パターン。")
+        expected = "正しく括弧が対応している パターン。"
+        self.assertEqual(actual, expected)
