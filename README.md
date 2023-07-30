@@ -8,6 +8,7 @@ In order to keep this project simple, we don't include any utilities that depend
 ## Current Functionalities
 
 - Remove Parentheses
+- Create Batch of Collections
 
 ## License
 
