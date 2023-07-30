@@ -15,11 +15,13 @@ def batch_by_slice(
         batch_size: int,
         drop_last: bool=False,
 ) -> Generator[T, None, None]:
+    assert batch_size > 0
+
     start: int = 0
     end: int = start + batch_size
     n: int = len(data)
 
-    while end < n:
+    while end <= n:
         yield data[start:end]
         start = end
         end += batch_size
